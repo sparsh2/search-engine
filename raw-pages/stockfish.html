@@ -1,0 +1,239 @@
+<html>
+  <div class="header">
+    <h2>Source - Wikipedia</h2>
+  </div>
+  
+  <div class="row">
+    <div class="leftcolumn">
+      <div class="card">
+        <h2>Stockfish</h2>
+
+
+<br><br>
+Stockfish is a free and open-source chess engine, available for various desktop and mobile platforms. It can be used in chess software through the Universal Chess Interface.
+
+
+<br><br>Stockfish has been one of the best chess engines in the world for several years;[4][5][6] it has won all main events of the Top Chess Engine Championship (TCEC) and the Chess.com Computer Chess Championship (CCC) since 2020 and, as of April 2024, is the strongest CPU chess engine in the world with an estimated Elo rating of 3634.[7]
+
+<br><br>
+
+The Stockfish engine was developed by Tord Romstad, Marco Costalba, and Joona Kiiski, and was derived from Glaurung, an open-source engine by Tord Romstad released in 2004. It is now being developed and maintained by the Stockfish community.[8] Stockfish historically used a classical hand-crafted function to evaluate board positions, but as of Stockfish 16.1 (2024) uses an entirely neural network-based evaluation function.[2]
+
+
+<br><br>
+Features
+
+<br><br>
+Stockfish can use up to 1024 CPU threads in multiprocessor systems. The maximal size of its transposition table is 32 TB. Stockfish implements an advanced alpha–beta search and uses bitboards. Compared to other engines, it is characterized by its great search depth, due in part to more aggressive pruning and late move reductions.[9] As of February 2024, Stockfish 16 (4-threaded) achieves an Elo rating of 3632 +13
+
+<br><br>
+−13 on the CCRL 40/15 benchmark.[10]
+
+
+<br><br>
+Stockfish supports Chess960, which is one feature that was inherited from Glaurung.[11] The Syzygy tablebase support, previously available in a fork maintained by Ronald de Man, was integrated into Stockfish in 2014.[12] In 2018 support for the 7-men Syzygy was added, shortly after becoming available.[13]
+
+
+<br><br>
+Stockfish has been a very popular engine on various platforms. On desktop, it is the default chess engine bundled with the Internet Chess Club interface programs BlitzIn and Dasher. On mobile, it has been bundled with the Stockfish app, SmallFish and Droidfish. Other Stockfish-compatible graphical user interfaces (GUIs) include Fritz, Arena, Stockfish for Mac, and PyChess.[14][15] Stockfish can be compiled to WebAssembly or JavaScript, allowing it to run in the browser. Both chess.com and Lichess provide Stockfish in this form in addition to a server-side program.[16] Release versions and development versions are available as C++ source code and as precompiled versions for Microsoft Windows, macOS, Linux 32-bit/64-bit and Android.
+
+
+<br><br>
+Architecture
+
+<br><br>
+The Stockfish engine essentially consists of three parts: board representation, heuristic tree search, and board evaluation. Board representation is about coding a chess board state efficiently so that it can be efficiently stored and searched over. Heuristic tree search approximates minimax tree search, which would be too slow to perform. Board evaluation takes in a board representation and gives it a score for how "good" the board is (i.e. the estimated chances of winning).[17]
+
+
+<br><br>
+Starting with Stockfish 12 (2020), a neural network board evaluation function was incorporated. In Stockfish 16.1 (2024), the classical board evaluation functions were removed, leaving just the neural network.[2]
+
+
+<br><br>
+History
+
+<br><br>
+The program originated from Glaurung, an open-source chess engine created by Romstad and first released in 2004. Four years later, Costalba, inspired by the strong open-source engine, decided to fork the project. He named it Stockfish because it was "produced in Norway and cooked in Italy" (Romstad is Norwegian, Costalba is Italian). The first version, Stockfish 1.0, was released in November 2008.[18][19] For a while, new ideas and code changes were transferred between the two programs in both directions, until Romstad decided to discontinue Glaurung in favor of Stockfish, which was the more advanced engine at the time.[20] The last Glaurung version (2.2) was released in December 2008.
+
+
+<br><br>
+Around 2011, Romstad decided to abandon his involvement with Stockfish in order to spend more time on his new iOS chess app.[21] On 18 June 2014 Marco Costalba announced that he had "decided to step down as Stockfish maintainer" and asked that the community create a fork of the current version and continue its development.[22] An official repository, managed by a volunteer group of core Stockfish developers, was created soon after and currently manages the development of the project.[23]
+
+
+<br><br>
+Fishtest
+
+<br><br>
+Since 2013, Stockfish has been developed using a distributed testing framework named Fishtest, where volunteers can donate CPU time for testing improvements to the program.[24][25][26]
+
+
+<br><br>
+Changes to game-playing code are accepted or rejected based on results of playing of tens of thousands of games on the framework against an older "reference" version of the program, using sequential probability ratio testing. Tests on the framework are verified using the chi-squared test, and only if the results are statistically significant are they deemed reliable and used to revise the software code.
+
+
+<br><br>
+After the inception of Fishtest, Stockfish experienced an explosive growth of 120 Elo points in just 12 months, propelling it to the top of all major rating lists.[27] In Stockfish 7, Fishtest author Gary Linscott was added to the official list of authors in acknowledgement of his contribution to Stockfish's strength.
+
+
+<br><br>
+As of April 2024, the framework has used a total of more than 12400 years of CPU time to play over 7.2 billion chess games.[28]
+
+
+<br><br>
+NNUE
+
+
+<br><br>
+Stockfish's NNUE visualized
+
+<br><br>
+In June 2020, an efficiently updatable neural network (NNUE) fork introduced by computer shogi programmers called Stockfish NNUE was discussed by developers.[29][30] In July 2020 chess news reported that Stockfish NNUE had "broken new ground in computer chess by incorporating a neural network into the already incredibly powerful Stockfish chess engine."[31] A NNUE merge into Stockfish was then announced and development builds became available.[32][33]
+
+
+<br><br>
+"The NNUE branch maintained by @nodchip has demonstrated strong results and offers great potential, and we will proceed to merge ... This merge will introduce machine learning based coding to the engine, thus enlarging the community of developers, bringing in new skills. We are eager to keep everybody on board, including all developers and users of diverse hardware, aiming to be an inclusive community ...the precise steps needed will become clearer as we proceed, I look forward to working with the community to make this happen!"
+
+
+<br><br>
+— Joost VandeVondele, 25 July 2020[32]
+
+<br><br>
+On 2 September 2020, the twelfth version of Stockfish was released, incorporating the aforementioned neural network improvement. According to the blog announcement, this new version "plays significantly stronger than any of its predecessors", typically winning ten times more game pairs than it loses when matched against version eleven.[34][35]
+
+
+<br><br>
+Competition results
+
+<br><br>
+Top Chess Engine Championship
+
+<br><br>
+Main article: Top Chess Engine Championship § Tournament results
+
+<br><br>
+Stockfish is a TCEC multiple-time champion and the current leader in trophy count. Ever since TCEC restarted in 2013, Stockfish has finished first or second in every season except one. In TCEC Season 4 and 5, Stockfish finished runner-up, with Superfinal scores of 23–25 first against Houdini 3 and later against Komodo 1142. Season 5 was notable for the winning Komodo team as they accepted the award posthumously for the program's creator Don Dailey, who succumbed to an illness during the final stage of the event. In his honor, the version of Stockfish that was released shortly after that season was named "Stockfish DD".[36]
+
+
+<br><br>
+On 30 May 2014, Stockfish 170514 (a development version of Stockfish 5 with tablebase support) convincingly won TCEC Season 6, scoring 35.5–28.5 against Komodo 7x in the Superfinal.[37] Stockfish 5 was released the following day.[38] In TCEC Season 7, Stockfish again made the Superfinal, but lost to Komodo with the score of 30.5–33.5.[37] In TCEC Season 8, despite losses on time caused by buggy code, Stockfish nevertheless qualified once more for the Superfinal, but lost the ensuing 100-game match 46.5–53.5 to Komodo.[37] In Season 9, Stockfish defeated Houdini 5 with a score of 54.5 versus 45.5.[37][39]
+
+
+<br><br>
+Stockfish finished third during season 10 of TCEC, the only season since 2013 in which Stockfish had failed to qualify for the superfinal. It did not lose a game but was still eliminated because it was unable to score enough wins against lower-rated engines. After this technical elimination, Stockfish went on a long winning streak, winning seasons 11 (59 vs. 41 against Houdini 6.03),[37][40] 12 (60 vs. 40 against Komodo 12.1.1),[37][41] and 13 (55 vs. 45 against Komodo 2155.00)[37][42] convincingly.[43] In Season 14, Stockfish faced a new challenger in Leela Chess Zero, but managed to eke out a win by one game (50.5–49.5).[37][44] Its winning streak was finally ended in season 15, when Leela qualified again and won 53.5–46.5,[37] but Stockfish promptly won season 16, defeating AllieStein 54.5–45.5, after Leela failed to qualify for the superfinal.[37] In season 17, Stockfish faced Leela again in the superfinal, losing 52.5–47.5. However, Stockfish has won every superfinal since: beating Leela 53.5–46.5 in season 18, 54.5–45.5 in season 19, 53–47 in season 20, and 56–44 in season 21.[37] In Season 22, Komodo Dragon beat out Leela to qualify for the superfinal, but was crushed by Stockfish 59.5-40.5. Stockfish did not lose an opening pair in this match.[45] Leela made the superfinal in Seasons 23 and 24, but was crushed by Stockfish both times (58.5-41.5 and 58-42).[46][47] In Season 25, Stockfish once again defeated Leela, but this time by a narrower margin of 52-48.[48]
+
+
+<br><br>
+
+Stockfish also took part in the TCEC cup, winning the first edition, but was surprisingly upset by Houdini in the semifinals of the second edition.[37][49] Stockfish recovered to beat Komodo in the third-place playoff.[37] In the third edition, Stockfish made it to the finals, but was defeated by Leela Chess Zero after blundering in a 7-man endgame tablebase draw. It turned this result around in the fourth edition, defeating Leela in the final 4.5–3.5.[37] In TCEC Cup 6, Stockfish finished third after losing to AllieStein in the semifinals, the first time it had failed to make the finals. Since then, Stockfish has consistently won the tournament, with the exception of the 11th edition which Leela won 8.5-7.5.
+
+
+<br><br>
+Chess.com Computer Chess Championship
+
+<br><br>
+Ever since chess.com hosted its first Chess.com Computer Chess Championship in 2018, Stockfish has been the most successful engine. It dominated the earlier championships, winning six consecutive titles before finishing second in CCC7. Since then, its dominance has come under threat from the neural-network engines Leelenstein and Leela Chess Zero, but it has continued to perform well, reaching at least the superfinal in every edition up to CCC11. CCC12 had for the first time a knockout format, with seeding placing CCC11 finalists Stockfish and Leela in the same half. Leela eliminated Stockfish in the semi-finals. However, a post-tournament match against the loser of the final, Leelenstein, saw Stockfish winning in the same format as the main event. After finishing second again to Leela in CCC13, and an uncharacteristic fourth in CCC14, Stockfish went on a long winning streak, taking first place in every championship since.
+
+
+<br><br>
+Other matches
+
+<br><br>
+Stockfish 5 versus Nakamura
+
+<br><br>
+Stockfish's strength relative to the best human chess players was most apparent in a handicap match with grandmaster Hikaru Nakamura (2798-rated) in August 2014. In the first two games of the match, Nakamura had the assistance of an older version of Rybka, and in the next two games, he received White with pawn odds but no assistance. Nakamura was the world's fifth-best human chess player at the time of the match, while Stockfish 5 was denied use of its opening book and endgame tablebase. Stockfish won each half of the match 1.5–0.5. Both of Stockfish's wins arose from positions in which Nakamura, as is typical for his playing style, pressed for a win instead of acquiescing to a draw.[173]
+
+
+<br><br>
+Stockfish 8 versus AlphaZero
+
+<br><br>
+Main article: AlphaZero
+
+<br><br>
+In December 2017, Stockfish 8 was used as a benchmark to test Google division DeepMind's AlphaZero, with each engine supported by different hardware. AlphaZero was trained through self-play for a total of nine hours, and reached Stockfish's level after just four.[174][175][176] In 100 games from the normal starting position, AlphaZero won 25 games as White, won 3 as Black, and drew the remaining 72, with 0 losses.[177] AlphaZero also played twelve 100-game matches against Stockfish starting from twelve popular openings for a final score of 290 wins, 886 draws and 24 losses, for a point score of 733:467.[178][note 2]
+
+
+<br><br>
+AlphaZero's victory over Stockfish sparked a flurry of activity in the computer chess community, leading to a new open-source engine aimed at replicating AlphaZero, known as Leela Chess Zero. By January 2019, Leela was able to defeat the version of Stockfish that played AlphaZero (Stockfish 8) in a 100-game match. An updated version of Stockfish narrowly defeated Leela Chess Zero in the superfinal of the 14th TCEC season, 50.5–49.5 (+10 =81 −9),[37] but lost the superfinal of the next season to Leela 53.5–46.5 (+14 =79 -7).[37][180] The two engines remain very close in strength to each other even as they continue to improve: Leela defeated Stockfish in the superfinal of TCEC Season 17, but Stockfish has won every TCEC season since.
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p>
+      <a href="magnus-carlsen.html">Magnus Carlsen</a><br>
+    </p>
+  </div>
+  
+  <style>
+    * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial;
+    padding: 20px;
+    background: #f1f1f1;
+  }
+  
+  /* Header/Blog Title */
+  .header {
+    padding: 30px;
+    font-size: 40px;
+    text-align: center;
+    background: white;
+  }
+  
+  /* Create two unequal columns that floats next to each other */
+  /* Left column */
+  .leftcolumn {
+    float: left;
+    width: 100%;
+  }
+  
+  /* Right column */
+  .rightcolumn {
+    float: left;
+    width: 25%;
+    padding-left: 20px;
+  }
+  
+  /* Fake image */
+  .fakeimg {
+    background-color: #aaa;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  /* Add a card effect for articles */
+  .card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Footer */
+  .footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+  }
+  
+  /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {
+      width: 100%;
+      padding: 0;
+    }
+  }
+  </style>
+</html>
