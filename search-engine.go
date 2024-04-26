@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"os"
+	"os/exec"
 	"path"
 	"search-engine/tries"
 	"sort"
@@ -15,13 +17,32 @@ var processedDataFilename = "processed-data.json"
 var processedFilepath = path.Join(".", workingDir, processedDataFilename)
 var crawledDataFilepath = path.Join(".", workingDir, "output.json")
 
+// run crawler.py
+func runCrawler() {
+	cmd := exec.Command("python3", "crawler.py", "magnus-carlsen.html")
+	// get command output
+	cmd.Stdout = os.Stdout
+	err := cmd.Run()
+	if err != nil {
+		panic(err)
+	}
+}
+
 func main() {
+	fmt.Println("Running the crawler")
+	runCrawler()
+	fmt.Println()
+	fmt.Printf("Crawler has successfully finished crawling the pages\n\n")
+	fmt.Println("Constructing the trie from the crawled data")
 	trie := readAndConstructTrie()
-	fmt.Println(trie.GetSize())
+	fmt.Printf("Trie has been successfully constructed. Number of nodes in the trie: %v\n\n", trie.GetSize())
 	for {
 		searchString := ""
 		fmt.Printf("Enter the keywords to search through the pages: ")
-		fmt.Scanf("%s", &searchString)
+		scanner := bufio.NewScanner(os.Stdin)
+		if scanner.Scan() {
+			searchString = scanner.Text()
+		}
 		fmt.Println()
 		searchString = strings.ToLower(searchString)
 
@@ -105,7 +126,7 @@ func main() {
 			for _, doc := range commonDocsLists {
 				relevantDocNames = append(relevantDocNames, doc.DocName)
 			}
-			fmt.Printf("Relevant docs: %v\n\n", relevantDocNames)
+			fmt.Printf("\nRelevant docs: %v\n\n", relevantDocNames)
 		}
 
 	}
