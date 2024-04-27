@@ -20,12 +20,12 @@ This means that the token occurs in 2 different documents - document id `0` and 
 The `processed-data.json` has the following form:
 ```json
 {
-	'doc_ids': {
-		0: 'home.html',
-		1: 'books.html',
-		2: 'cars.html'
+  "doc_ids": {
+		"0": "home.html",
+		"1": "books.html",
+		"2": "cars.html"
 	},
-	'data' : [[[0, 1], [1, 4], [2, 2]], [[0, 2]]]
+	"data" : [[[0, 1], [1, 4], [2, 2]], [[0, 2]]]
 }
 ```
 The `data` field is just a list of occurrence list for each token. The index of each occurrence list is stored in the trie. The `doc_ids` field maps document ids to the document names.
