@@ -19,9 +19,10 @@ var crawledDataFilepath = path.Join(".", workingDir, "output.json")
 
 // run crawler.py
 func runCrawler() {
-	cmd := exec.Command("python3", "crawler.py", "magnus-carlsen.html")
+	cmd := exec.Command("python", "crawler.py", "magnus-carlsen.html")
 	// get command output
 	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
 	err := cmd.Run()
 	if err != nil {
 		panic(err)
@@ -29,10 +30,10 @@ func runCrawler() {
 }
 
 func main() {
-	fmt.Println("Running the crawler")
-	runCrawler()
-	fmt.Println()
-	fmt.Printf("Crawler has successfully finished crawling the pages\n\n")
+	// fmt.Println("Running the crawler")
+	// runCrawler()
+	// fmt.Println()
+	// fmt.Printf("Crawler has successfully finished crawling the pages\n\n")
 	fmt.Println("Constructing the trie from the crawled data")
 	trie := readAndConstructTrie()
 	fmt.Printf("Trie has been successfully constructed. Number of nodes in the trie: %v\n\n", trie.GetSize())
@@ -44,12 +45,19 @@ func main() {
 			searchString = scanner.Text()
 		}
 		fmt.Println()
-		searchString = strings.ToLower(searchString)
+		lowerSearchString := strings.ToLower(searchString)
+		alphaNumeric := "abcdefghijklmnopqrstuvwxyz0123456789,"
+		searchString = ""
+		for _, v := range lowerSearchString {
+			if strings.Contains(alphaNumeric, string(v)) {
+				searchString += string(v)
+			}
+		}
 
 		searchTokens := []string{}
 		for _, v := range strings.Split(searchString, ",") {
 			if v != "" {
-				searchTokens = append(searchTokens, v)
+				searchTokens = append(searchTokens, strings.Trim(v, " "))
 			}
 		}
 
@@ -73,49 +81,69 @@ func main() {
 		}
 
 		if !ok {
+			fmt.Printf("No matching docs found containing all keywords\n\n")
 			continue
 		}
 
 		// find intersection of the docs across all keywords
-		docIdx := 0
+		docIdxs := []int{}
 		commonDocsLists := []DocAndFreq{}
+		for i := 0; i < len(docsLists); i++ {
+			docIdxs = append(docIdxs, 0)
+		}
+
 		for {
+			// check if all the pointers are less than the length of the lists
+			lessThanLen := true
+			for i, v := range docIdxs {
+				if v >= len(docsLists[i]) {
+					lessThanLen = false
+					break
+				}
+			}
+			if !lessThanLen {
+				break
+			}
+
+			// get the max doc index from all the pointers
+			maxDocIdx := 0
+			for i, v := range docIdxs {
+				if docsLists[i][v].DocId > maxDocIdx {
+					maxDocIdx = docsLists[i][v].DocId
+				}
+			}
+
+			// for each pointer, increment the pointer as long as it is less than the max doc index
 			done := false
-			// check if the docIdx is less than len of all docsLists
-			for i := 0; i < len(docsLists); i++ {
-				if docIdx == len(docsLists[i]) {
-					// there will not be any other common docs, so break the loop
+			for i := 0; i < len(docIdxs); i++ {
+				for docIdxs[i] < len(docsLists[i]) && docsLists[i][docIdxs[i]].DocId < maxDocIdx {
+					docIdxs[i]++
+				}
+				if docIdxs[i] == len(docsLists[i]) {
 					done = true
 					break
 				}
 			}
-
 			if done {
 				break
 			}
 
-			commonDocName := docsLists[0][docIdx].DocName
-			sameDocName := true
-			commonDocFreq := 0
-
-			// check if all the indices point to the same doc
-			for i := 0; i < len(docsLists); i++ {
-				if docsLists[i][docIdx].DocName != commonDocName {
-					sameDocName = false
+			// if all the pointers point to the same doc, add the doc to the commonDocsList
+			allEqual := true
+			for i, v := range docIdxs {
+				if docsLists[i][v].DocId != maxDocIdx {
+					allEqual = false
+					break
 				}
-				commonDocFreq += docsLists[i][docIdx].Freq
 			}
 
-			// if all indices point to the same doc, append the doc to commonDocsList with sum of the frequency
-			if sameDocName {
-				commonDocsLists = append(commonDocsLists, DocAndFreq{
-					DocName: commonDocName,
-					Freq:    commonDocFreq,
-				})
+			if allEqual {
+				commonDocsLists = append(commonDocsLists, docsLists[0][docIdxs[0]])
+				// increment one of the pointers to move to the next doc
+				docIdxs[0]++
 			}
-
-			docIdx++
 		}
+
 		if len(commonDocsLists) == 0 {
 			fmt.Printf("No matching docs found containing all keywords\n\n")
 		} else {
@@ -149,6 +177,7 @@ func getDocNameAndFrequency(docListId int) []DocAndFreq {
 	docList := []DocAndFreq{}
 	for _, v := range list {
 		docList = append(docList, DocAndFreq{
+			DocId:   v[0],
 			DocName: processedData.DocIds[v[0]],
 			Freq:    v[1],
 		})
@@ -196,6 +225,7 @@ func readAndConstructTrie() *tries.Trie {
 }
 
 type DocAndFreq struct {
+	DocId   int
 	DocName string
 	Freq    int
 }
