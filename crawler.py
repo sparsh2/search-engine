@@ -16,7 +16,7 @@ working_dir = Path(__file__).resolve().parent / 'working-dir'
 alphanum = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 num = '0123456789'
 stop_words = ['a', 'an', 'the', 'aboard', 'elsewhere', 'such','about','above','across','after','against','along','amid','among','anti','around','as','at','before','behind','below','beneath','beside','besides','between','beyond','but','by','concerning','considering','despite','down','during','except','excepting','excluding','following','for','from','in','inside','into','like','minus','near','of','off','on','onto','opposite','outside','over','past','per','plus','regarding','round','save','since','than','through','to','toward','towards','under','underneath','unlike','until','up','upon','versus','via','with','within','without', 
-              "you","i","he","she","it","we","they","my","your","his","her","its","our","their","this","that","these","those","who","whom","which","what","whose","all","any","each","every","none","some","anybody","anyone","anything","other","another","myself","yourself","himself","herself","itself","ourselves","themselves"]
+              "you","i","he","she","it","we","they","my","your","his","her","its","our","their","this","that","these","those","who","whom","which","what","whose","all","any","each","every","none","some","anybody","anyone","anything","other","another","myself","yourself","himself","herself","itself","ourselves","themselves","is","also","can","be","or","and"]
 
 def transform_alpha_numeric(c):
   if c not in alphanum:

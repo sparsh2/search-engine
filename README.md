@@ -15,7 +15,7 @@ Each occurrence list for a token has the following form:
 ```
 [[0, 2], [3, 7]]
 ```
-This means that the token occurs in 2 different documents - document id `0` and `3`, with the corresponding frequency i.e it occurs 2 times in document `0` and `7` times in document `3`.
+This means that the token occurs in 2 different documents - document id `0` and `3`, with the corresponding frequency i.e it occurs `2` times in document `0` and `7` times in document `3`.
 
 The `processed-data.json` has the following form:
 ```json
@@ -102,4 +102,5 @@ keyword "history" found in: [psychology.html,magnus-carlsen.html,quarternary-gla
 Relevant docs: [quarternary-glaciation.html]
 ```
 
-
+## Run tests (optional)
+There are some tests added to compressed tries in `./tries/compressed_tries_test.go`. You can run them by running the command: `go test ./...` from the root directory.

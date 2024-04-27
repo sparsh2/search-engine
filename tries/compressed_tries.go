@@ -3,9 +3,8 @@ package tries
 import "fmt"
 
 type TrieNode struct {
-	isEnd bool
-	data  string
-	// add char -> TrieNode map
+	isEnd               bool
+	data                string
 	mp                  []*TrieNode
 	occurrenceListIndex int
 }
@@ -36,6 +35,10 @@ func charIndex(char uint8) int {
 	} else {
 		return int(26 + char - "0"[0])
 	}
+}
+
+func (t *Trie) GetRoot() *TrieNode {
+	return t.root
 }
 
 func (t *Trie) Search(token string) (docId int, err error) {

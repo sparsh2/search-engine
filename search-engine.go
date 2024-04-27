@@ -85,6 +85,10 @@ func main() {
 			continue
 		}
 
+		if len(searchTokens) == 0 {
+			continue
+		}
+
 		// find intersection of the docs across all keywords
 		docIdxs := []int{}
 		commonDocsLists := []DocAndFreq{}
